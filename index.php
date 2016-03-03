@@ -1,6 +1,6 @@
-<?php require('dataref-search-inc.php');
+<?php require('command-search-inc.php');
 parse();
-//var_dump($datarefs);
+//var_dump($commands);
 ?>
 <?php print '<?xml version="1.0" encoding="UTF-8" ?>'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -11,48 +11,44 @@ parse();
     <meta name="document-rights" content="" />
     <meta name="language" content="en" />
     <meta name="robots" content="INDEX, FOLLOW" />
-    <meta name="title" content="XPlane2Blender - Dataref Search" />
+    <meta name="title" content="XPlane2Blender - Command Search" />
     <meta name="author" content="Ondrej Brinkel" />
     <meta name="owner" content="Ondrej Brinkel" />
     <meta name="publisher" content="Ondrej Brinkel" />
-    <meta name="copyright" content="Ondrej Brinkel 2011" />
-    <meta name="keywords" content="X-Plane, X-Plane 9, X-Plane 10, Datarefs, Dataref, XPlane2Blender" />
-    <meta name="description" content="Search X-Plane Datarefs" />
+    <meta name="copyright" content="Ondrej Brinkel 2016" />
+    <meta name="keywords" content="X-Plane, X-Plane 9, X-Plane 10, Commands, Command, XPlane2Blender" />
+    <meta name="description" content="Search X-Plane Commands" />
     <meta name="document-type" content="Public" />
 
     <meta name="document-distribution" content="Global" />
     <meta http-equiv="Content-Script-Type" content="text/javascript" />
-    <title>X-Plane - Dataref Search</title>
-    
-    <link rel="stylesheet" href="dataref-search.css" type="text/css" />
+    <title>X-Plane - Command Search</title>
+
+    <link rel="stylesheet" href="command-search.css" type="text/css" />
     <script type="text/javascript" src="jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.zclip.min.js"></script>
-	<script type="text/javascript" src="dataref-search.js"></script>
+	<script type="text/javascript" src="command-search.js"></script>
 </head>
 <body>
     <div id="page">
         <div id="header">
-            <h1>X-Plane - Dataref Search</h1>
-            <h2 id="datarefs-version"><?php print $version; ?></h2>
+            <h1>X-Plane - Command Search</h1>
 			<ol class="howto">
 				<li>Type in your search criteria and click "Search".</li>
-				<li>Click on the dataref name you want to copy.</li>
-				<li>Double click "Copy to clipboard" and paste the dataref into Blender.</li>
+				<li>Click on the command name you want to copy.</li>
+				<li>Double click "Copy to clipboard" and paste the command into Blender.</li>
 			</ol>
         </div>
 		<div id="search">
 			<form method="get">
 				<label for="search-name">Name</label><input name="name" type="text" id="search-name" value="<?php print (isset($_GET['name']))?$_GET['name']:''; ?>" />
-				<label for="search-type">Type</label><select name="type" id="search-type"><?php print fillSelect($types,(isset($_GET['type']))?$_GET['type']:'');?></select>
-				<label for="search-writable">Writable</label><select name="writable" id="search-writable"><?php print fillSelect($writables,(isset($_GET['writable']))?$_GET['writable']:'');?></select>
-				<label for="search-units">Units</label><select name="units" id="search-units"><?php print fillSelect($units,(isset($_GET['units']))?$_GET['units']:'');?></select>
 				<label for="search-description">Description</label><input name="description" type="text" value="<?php print (isset($_GET['description']))?$_GET['description']:''; ?>" />
 				<input name="submit" type="submit" id="search-submit" value="Search"/>
 			</form>
 			<button id="copy-button" title="Double click to copy to clipboard">Copy to clipboard</button>
 			<label for="test-copy">Test your clipboard</label><input id="test-copy" type="text" name="test" value="" />
 			<p id="messages">
-				Search matched <?php print count($datarefs); ?> datarefs. Found in <?php print $time; ?> seconds
+				Search matched <?php print count($commands); ?> commands. Found in <?php print $time; ?> seconds
 			</p>
 			<div class="clear"></div>
 		</div>
@@ -60,14 +56,11 @@ parse();
             <table>
                 <thead>
                     <th></th>
-					<th>Name</th>
-                    <th>Type</th>
-                    <th>Writable</th>
-                    <th>Units</th>
+					          <th>Name</th>
                     <th>Description</th>
                 </thead>
                 <tbody id="search-results">
-					<?php print fillTable();?>
+					      <?php print fillTable();?>
                 </tbody>
             </table>
         </div>
